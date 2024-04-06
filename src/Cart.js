@@ -27,7 +27,6 @@ function Cart({ onSubmit, dataF }) {
 
   return (
     <div>
-      {/* Display cart items */}
       <div>
         {dataF.map((item) => (
           <div key={item.id}>

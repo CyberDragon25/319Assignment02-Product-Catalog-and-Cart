@@ -1,25 +1,44 @@
 import React from "react";
 
 function Confirmation({ dataF, updateHooks }) {
+  
+  const calculateTotal = (data) => {
+    let total = 0;
+    data.forEach((item) => {
+      total += item.price;
+    });
+    return total;
+  };
+
   return (
-    <div>
-      <div>
-        <h1>Payment summary:</h1>
-        <h3>{dataF.formData.fullName}</h3>
-        <p>{dataF.formData.email}</p>
-        <p>{dataF.formData.city}, {dataF.formData.state} {dataF.formData.zip}</p>
-        <button onClick={updateHooks}>Submit</button>
-      </div>
-      <div>
-        {dataF.map((item) => (
-          <div key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <p>{item.title}</p>
-            <p>${item.price}</p>
-          </div>
-        ))}
-      </div>
+<div className="container">
+  <div className="row">
+    <div className="col">
+      <h1 className="mb-4">Payment summary:</h1>
+      <h3>{dataF.formData.fullName}</h3>
+      <p>{dataF.formData.email}</p>
+      <p>{dataF.formData.city}, {dataF.formData.state} {dataF.formData.zip}</p>
+      <button className="btn btn-primary" onClick={updateHooks}>Return to browsing</button>
     </div>
+    <div className="col">
+      {dataF.map((item) => (
+        <div className="card mb-3" key={item.id} style={{ maxWidth: '200px' }}>
+          <img className="card-img-top img-thumbnail" src={item.image} alt={item.title} style={{ width: '150px', height: '150px' }} />
+          <div className="card-body">
+            <h5 className="card-title" style={{ fontSize: '16px' }}>{item.title}</h5>
+            <p className="card-text" style={{ fontSize: '14px' }}>${item.price}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div className="row mt-4">
+    <div className="col">
+      <h4>Total:</h4>
+      <p className="lead">${calculateTotal(dataF)}</p>
+    </div>
+  </div>
+</div>
   );
 }
 
