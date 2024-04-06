@@ -46,17 +46,13 @@ function Browse({ handleSubmit, onSubmit, register, errors, updateHooks }) {
               type="button"
               className="btn btn-light"
               onClick={() => removeFromCart(el)}
-            >
-              {" "}
-              -{" "}
-            </button>{" "}
+            >{" "}-{" "}</button>
+            {" "}
             <button
               type="button"
               className="btn btn-light"
               onClick={() => addToCart(el)}
-            >
-              {" "}
-              +{" "}
+            >{" "}+{" "}
             </button>
           </div>
           <div className="col">
@@ -73,7 +69,11 @@ function Browse({ handleSubmit, onSubmit, register, errors, updateHooks }) {
   }
 
   const handleClick = () => {
-    onSubmit(cart);
+    cart.forEach((item) => {
+        item.quantity = howManyofThis(item.id)
+      });
+      const uniqueCart = [...new Set(cart)]; //removes non unique cart items after setting quantity
+    onSubmit(uniqueCart);
   };
 
   return (
