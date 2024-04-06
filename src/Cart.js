@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Cart({ onSubmit }) {
+function Cart({ onSubmit, dataF }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -21,7 +21,8 @@ function Cart({ onSubmit }) {
   };
 
   const handleClick = () => {
-    onSubmit(formData);
+    dataF.formData = formData;
+    onSubmit(dataF);
   };
 
   return (
