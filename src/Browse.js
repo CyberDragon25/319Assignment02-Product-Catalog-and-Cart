@@ -77,6 +77,10 @@ function Browse({ handleSubmit, onSubmit, register, errors, updateHooks }) {
         return hmot.length;
     }
 
+    const handleClick = () => {
+        onSubmit(cart);
+      };
+
     return (
         <div>
             STORE SE/ComS319
@@ -87,7 +91,7 @@ function Browse({ handleSubmit, onSubmit, register, errors, updateHooks }) {
                 onChange={(e) => search(e.target.value)}
             />
             <br></br>
-            <button onClick={updateHooks}>Checkout</button>
+            <button onClick={handleClick}>Checkout</button>
             <div class="card">
                 <div class="row">
                     {/* HERE, IT IS THE SHOPING CART */}
