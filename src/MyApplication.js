@@ -31,7 +31,7 @@ function MyApplication() {
       {viewer === 0 && <Browse handleSubmit={handleSubmit} updateHooks={updateHooks} onSubmit={onSubmit} register={register} errors={errors} />}
       {viewer === 1 && <Cart   handleSubmit={handleSubmit} onSubmit={onSubmit} errors={errors} dataF={dataF} updateHooks={updateHooks} register={register} />}
       {viewer === 2 && <Confirmation dataF={dataF} updateHooks={updateHooks} />}
-      <button onClick={decrementViewer} disabled={viewer === -1}>Return</button>
+      <button className="btn btn-primary" onClick={decrementViewer} disabled={viewer === -1}>Return</button>
     </div>
   );
 }
