@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Cart({ onSubmit }) {
+function Cart({ onSubmit, dataF }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -21,10 +21,12 @@ function Cart({ onSubmit }) {
   };
 
   const handleClick = () => {
-    onSubmit(formData);
+    dataF.formData = formData;
+    onSubmit(dataF);
   };
 
   return (
+<<<<<<< HEAD
     <div className="container">
       <form>
         <div className="mb-3">
@@ -113,6 +115,79 @@ function Cart({ onSubmit }) {
           Submit
         </button>
       </form>
+=======
+    <div>
+      {/* Display cart items */}
+      <div>
+        {dataF.map((item) => (
+          <div key={item.id}>
+            <img src={item.image} alt={item.title} />
+            <p>{item.title}</p>
+            <p>${item.price}</p>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <input
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          placeholder="Full Name"
+        /><br></br>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+        /><br></br>
+        <input
+          type="text"
+          name="creditCard"
+          value={formData.creditCard}
+          onChange={handleChange}
+          placeholder="Credit Card"
+        /><br></br>
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Address"
+        /><br></br>
+        <input
+          type="text"
+          name="address2"
+          value={formData.address2}
+          onChange={handleChange}
+          placeholder="Address 2"
+        /><br></br>
+        <input
+          type="text"
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          placeholder="City"
+        /><br></br>
+        <input
+          type="text"
+          name="state"
+          value={formData.state}
+          onChange={handleChange}
+          placeholder="State"
+        /><br></br>
+        <input
+          type="text"
+          name="zip"
+          value={formData.zip}
+          onChange={handleChange}
+          placeholder="Zip"
+        /><br></br>
+        <button onClick={handleClick}>Submit</button>
+      </div>
+>>>>>>> f90f6fc9c6e9cb15659a18215548530870a3e18d
     </div>
   );
 }
