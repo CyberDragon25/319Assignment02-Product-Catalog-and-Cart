@@ -35,12 +35,12 @@ function Cart({ onSubmit, dataF }) {
       alert('Please enter a valid email address.');
       return;
     }
-  
     const zipRegex = /^\d{5}$/;
     if (!zipRegex.test(formData.zip)) {
       alert('Please enter a 5-digit zip code.');
       return;
     }
+    
     if (
       !formData.fullName ||
       !formData.email ||
