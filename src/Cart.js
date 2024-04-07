@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 
 function Cart({ onSubmit, dataF }) {
   const [formData, setFormData] = useState({
@@ -12,9 +11,6 @@ function Cart({ onSubmit, dataF }) {
     state: "",
     zip: "",
   });
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,10 +25,24 @@ function Cart({ onSubmit, dataF }) {
     data.forEach((item) => {
       total += item.price;
     });
-    return total.toFixed(2);
+    return total.toFixed(2);;
   };
 
   const handleClick = () => {
+    // Check if any required fields are empty
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.creditCard ||
+      !formData.address ||
+      !formData.city ||
+      !formData.state ||
+      !formData.zip
+    ) {
+      alert('Please fill out all required fields.');
+      return;
+    }
+  
     dataF.formData = formData;
     dataF.total = calculateTotal(dataF);
     onSubmit(dataF);
@@ -40,119 +50,112 @@ function Cart({ onSubmit, dataF }) {
 
   return (
     <div className="container">
-      <div className="d-flex flex-wrap">
-        {dataF.map((item) => (
-          <div
-            className="card mb-3"
-            key={item.id}
-            style={{ maxWidth: "200px", flex: "0 0 auto" }}
-          >
-            <img
-              className="card-img-top img-thumbnail"
-              src={item.image}
-              alt={item.title}
-              style={{ width: "150px", height: "150px" }}
-            />
-            <div className="card-body">
-              <h5 className="card-title" style={{ fontSize: "16px" }}>
-                {item.title}
-              </h5>
-              <p className="card-text" style={{ fontSize: "14px" }}>
-                ${item.price * item.quantity}
-              </p>
-              <p className="card-text" style={{ fontSize: "14px" }}>
-                {item.quantity}x for ${item.price} each
-              </p>
+          <div className="d-flex flex-wrap">
+          {dataF.map((item) => (
+            <div className="card mb-3" key={item.id} style={{ maxWidth: '200px', flex: '0 0 auto' }}>
+              <img className="card-img-top img-thumbnail" src={item.image} alt={item.title} style={{ width: '150px', height: '150px' }} />
+              <div className="card-body">
+                <h5 className="card-title" style={{ fontSize: '16px' }}>{item.title}</h5>
+                <p className="card-text" style={{ fontSize: '14px' }}>${item.price*item.quantity}</p>
+                <p className="card-text" style={{ fontSize: '14px' }}>{item.quantity}x for ${item.price} each</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="row mt-4">
+          ))}
+        </div>
+        <div className="row mt-4">
         <div className="col">
           <h4>Total:</h4>
           <p className="lead">${calculateTotal(dataF)}</p>
         </div>
       </div>
-      <form onSubmit={handleSubmit(handleClick)} className="container mt-5">
+      <form>
         <div className="mb-3">
           <input
-            {...register("fullName", { required: true })}
             type="text"
             className="form-control"
             name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
             placeholder="Full Name"
+            required
           />
-          {errors.fullName && <span>This field is required</span>}
         </div>
         <div className="mb-3">
           <input
-            {...register("email", { required: true })}
             type="email"
             className="form-control"
             name="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder="Email"
+            required
           />
-          {errors.email && <span>This field is required</span>}
         </div>
         <div className="mb-3">
           <input
-            {...register("creditCard", { required: true })}
             type="text"
             className="form-control"
             name="creditCard"
+            value={formData.creditCard}
+            onChange={handleChange}
             placeholder="Credit Card"
+            required
           />
-          {errors.creditCard && <span>This field is required</span>}
         </div>
         <div className="mb-3">
           <input
-            {...register("address", { required: true })}
             type="text"
             className="form-control"
             name="address"
+            value={formData.address}
+            onChange={handleChange}
             placeholder="Address"
+            required
           />
-          {errors.address && <span>This field is required</span>}
         </div>
         <div className="mb-3">
           <input
-            {...register("address2")}
             type="text"
             className="form-control"
             name="address2"
+            value={formData.address2}
+            onChange={handleChange}
             placeholder="Address 2"
           />
         </div>
         <div className="row">
           <div className="col-md-6 mb-3">
             <input
-              {...register("city", { required: true })}
               type="text"
               className="form-control"
               name="city"
+              value={formData.city}
+              onChange={handleChange}
               placeholder="City"
+              required
             />
-            {errors.city && <span>This field is required</span>}
           </div>
           <div className="col-md-3 mb-3">
             <input
-              {...register("state", { required: true })}
               type="text"
               className="form-control"
               name="state"
+              value={formData.state}
+              onChange={handleChange}
               placeholder="State"
+              required
             />
-            {errors.state && <span>This field is required</span>}
           </div>
           <div className="col-md-3 mb-3">
             <input
-              {...register("zip", { required: true })}
               type="text"
               className="form-control"
               name="zip"
+              value={formData.zip}
+              onChange={handleChange}
               placeholder="Zip"
+              required
             />
-            {errors.zip && <span>This field is required</span>}
           </div>
         </div>
         <button type="button" className="btn btn-primary" onClick={handleClick}>
