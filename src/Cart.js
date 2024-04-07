@@ -25,11 +25,12 @@ function Cart({ onSubmit, dataF }) {
     data.forEach((item) => {
       total += item.price;
     });
-    return total;
+    return total.toFixed(2);;
   };
 
   const handleClick = () => {
     dataF.formData = formData;
+    dataF.total = calculateTotal(dataF);
     onSubmit(dataF);
   };
 

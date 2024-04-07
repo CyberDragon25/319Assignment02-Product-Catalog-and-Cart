@@ -17,8 +17,9 @@ function Browse({ handleSubmit, onSubmit, register, errors, updateHooks }) {
     for (let i = 0; i < cart.length; i++) {
       totalVal += cart[i].price;
     }
-    setCartTotal(totalVal);
+    setCartTotal(totalVal.toFixed(2));
   };
+  
 
   const removeFromCart = (el) => {
     const newCart = cart.filter((cartItem) => cartItem.id !== el.id);
